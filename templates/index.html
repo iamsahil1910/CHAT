@@ -1,27 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<center><div>
-<h1>Register for Parivartan Events</h1> <form action="/login"> <button type="submit"/> </form>Log In <hr/></div><center>
-      <form onsubmit=pop(); action="/register" method="post">
-    Name: &#160<input autofocus name="name" placeholder="Name" type="text"/> <br/> <br/>
-    Email: &#160<input name="email" placeholder="Email" type="email"/> <br/> <br/>
-    Block: &#160<select name="block"> <br/>
-  <option value="COE">COE</option>
-  <option value="CEC">CEC</option>
-  <option value="Pharmacy">Pharmacy</option>
-  <option value="CBS">CBS</option>
-    </select>
-    <br/><br/>
-    Mobile: &#160<select style="width:3%; padding:0px 0px;"><option value="+91">+91</option></select></select>
-    &#160<input name="mobile" placeholder="Mobile" type="tel"/> <br/> <br/>
-    <input type="submit" value="Register"/>
-    <input type="reset" value="Reset" />
-</form>
+	<div>
+		<center>
+		<h1>	LET's CHAT </h1>
+		</center>
+	</div>
+	<br><br><br><br><br><br><br><br>
+<center>
+	<form action="/login">
+		<button type="submit">LogIn
+	</form>
+	<form action="/signup">
+		<button type="submit">SignUp
+	</form>
 </center>
-{% for i in range(30) %}
- <br/>
-{% endfor %}<hr/>
+
+
 {% endblock %}
+
 
 
