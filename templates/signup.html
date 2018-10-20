@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1> <center> SignUp </center> </h1>
+<center>
+  <form action="/home" method="post">
+    <input type="text" placeholder="First Name" name="fname"> <br><br>
+    <input type="text" placeholder="Last Name" name="lname"> <br><br>
+    <input type="email" placeholder="E-mail" name="email"> <br><br>
+    <input type="radio" name="gender" value="male" checked> Male
+    <input type="radio" name="gender" value="female"> Female
+    <input type="radio" name="gender" value="other"> Other
+    <br> <br>
+    <input type="password" placeholder="password" name="pwd"><br><br>
+    <input type="submit" value="LogIn">
+    <input type="reset" value="Reset">
+  </form>
+{% endblock %}
