@@ -23,8 +23,11 @@ def signup():
     pwd = request.form.get("pwd")
     if not fname or not lname or not email or not pwd:
         return render_template("signup.html")
-    return render_template("home.html")
-    return render_template("signup.html")
+    db.execute("INSERT INTO users (fname, lname, email, gender, password) VALUES(:fname, :lname, :email, :gender, :password)", {"fname":fname, "lname":lname, "email":email, "gender":gender, "password":pwd})
+    db.commit()
+
+    n = db.execute("SELECT fname FROM users WHERE email = :email", {"email":email    }).fetchone()
+    return render_template("home.html", user = n[0])
 
 @app.route("/login")
 def login():
@@ -32,10 +35,10 @@ def login():
 
 @app.route("/home", methods=["POST", "GET"])
 def home():
-    username = request.form.get("email")
+    email = request.form.get("email")
     password = request.form.get("pwd")
-    if db.execute("SELECT user FROM users WHERE email = :username AND password = :password", {"username": username, "password": password}).rowcount == 0:
+    if db.execute("SELECT user FROM users WHERE email = :email AND password = :password", {"email": email, "password": password}).rowcount == 0:
         return render_template("login.html")
     else:
-        n = db.execute("SELECT fname FROM users WHERE email = :username", {"username": username}).fetchall()
-        return render_template("home.html", user=n)
+        n = db.execute("SELECT fname FROM users WHERE email = :email", {"email": email}).fetchone()
+        return render_template("home.html", user=n[0])
