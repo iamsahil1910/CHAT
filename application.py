@@ -21,12 +21,18 @@ def signup():
     email = request.form.get("email")
     gender = request.form.get("gender")
     pwd = request.form.get("pwd")
+
     if not fname or not lname or not email or not pwd:
         return render_template("signup.html")
+
+    n = db.execute("SELECT email FROM users WHERE email = :email", {"email":email}).fetchone()
+    if email == n:
+        return render_template("signup.html")
+
     db.execute("INSERT INTO users (fname, lname, email, gender, password) VALUES(:fname, :lname, :email, :gender, :password)", {"fname":fname, "lname":lname, "email":email, "gender":gender, "password":pwd})
     db.commit()
 
-    n = db.execute("SELECT fname FROM users WHERE email = :email", {"email":email    }).fetchone()
+    n = db.execute("SELECT fname FROM users WHERE email = :email", {"email":email}).fetchone()
     return render_template("home.html", user = n[0])
 
 @app.route("/login")
